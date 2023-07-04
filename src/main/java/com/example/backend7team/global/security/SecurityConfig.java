@@ -31,9 +31,13 @@ public class SecurityConfig {
 
                 .and()
 
+                // users
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/signin").permitAll()
+
+                // accidents
+                .antMatchers(HttpMethod.GET, "/accidents/information").permitAll()
 
                 .anyRequest().authenticated()
                 .and()
