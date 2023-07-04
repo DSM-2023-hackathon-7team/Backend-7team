@@ -15,4 +15,12 @@ public class UserRepository {
     public Optional<User> queryUserByAccountId(String accountId) {
         return userJpaRepository.findByAccountId(accountId);
     }
+
+    public User saveUser(User user) {
+        return userJpaRepository.save(user);
+    }
+
+    public boolean existsUserByAccountId(String accountId) {
+        return userJpaRepository.existsByAccountId(accountId);
+    }
 }
