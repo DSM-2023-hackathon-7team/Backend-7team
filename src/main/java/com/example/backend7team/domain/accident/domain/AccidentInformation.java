@@ -1,18 +1,20 @@
 package com.example.backend7team.domain.accident.domain;
 
+import com.example.backend7team.domain.user.domain.User;
 import com.example.backend7team.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,17 +35,22 @@ public class AccidentInformation extends BaseTimeEntity {
     private String imageUrl;
 
     @Column(columnDefinition = "BIGINT", nullable = false)
-    private Long views;
+    private Integer views;
 
     @Column(columnDefinition = "TINYINT(1)", nullable = false)
-    private Boolean isVerified;
+    private boolean isVerified;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Builder
-    public AccidentInformation(String title, String content, String imageUrl, Long views, Boolean isVerified) {
+    public AccidentInformation(String title, String content, String imageUrl, Integer views, boolean isVerified, User user) {
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
         this.views = views;
         this.isVerified = isVerified;
+        this.user = user;
     }
 }
