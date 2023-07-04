@@ -1,0 +1,24 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_URL:localhost}:3306/${DB_NAME:7team}?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&rewriteBatchedStatements=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:1234}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+    properties.hibernate:
+      format_sql: true
+      show_sql: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+jwt:
+  header: ${JWT_HEADER:Authorization}
+  prefix : ${JWT_PREFIX:Bearer }
+  secret: ${JWT_SECRET:asdf}
+  access-exp: ${TOKEN_ACCESS_EXP:3600}
+  refresh-exp: ${TOKEN_REFRESH_EXP:1209600}
