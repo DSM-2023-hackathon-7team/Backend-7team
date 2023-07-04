@@ -59,13 +59,13 @@ public class JwtTokenProvider {
         }
 
         UserDetails userDetails = authDetailsService.loadUserByUsername(claims.getSubject());
-        return new UsernamePasswordAuthenticationToken(userDetails, "");
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public String resolveToken(HttpServletRequest request) {
         String token = request.getHeader(jwtProperties.getHeader());
         if (token != null && token.startsWith(jwtProperties.getPrefix())) {
-            token.replace(jwtProperties.getPrefix(), "");
+            return token.replace(jwtProperties.getPrefix(), "");
         }
         return null;
     }
