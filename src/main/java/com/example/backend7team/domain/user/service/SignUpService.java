@@ -27,7 +27,7 @@ public class SignUpService {
                         .accountId(request.getAccountId())
                         .password(passwordEncoder.encode(request.getPassword()))
                         .name(request.getName())
-                .build()
+                        .build()
         );
     }
 }
