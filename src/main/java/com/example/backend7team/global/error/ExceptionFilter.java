@@ -32,7 +32,6 @@ public class ExceptionFilter extends OncePerRequestFilter {
             response.setCharacterEncoding("UTF-8");
 
             ErrorResponse errorResponse = new ErrorResponse(errorCode.getStatus(), errorCode.getMessage());
-
             objectMapper.writeValue(response.getWriter(), errorResponse);
         }
     }
