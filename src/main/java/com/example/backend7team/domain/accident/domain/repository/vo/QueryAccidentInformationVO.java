@@ -7,16 +7,21 @@ import lombok.Getter;
 @Getter
 public class QueryAccidentInformationVO {
 
+    private final Long accidentInformationId;
     private final String title;
     private final String content;
     private final String imageUrl;
-    //TODO 좋아요 개수 추가
+    private final Integer likeCount;
+    private boolean isLikes;
 
     @Builder
     @QueryProjection
-    public QueryAccidentInformationVO(String title, String content, String imageUrl) {
+    public QueryAccidentInformationVO(Long accidentInformationId, String title, String content, String imageUrl, Integer likeCount, Long isLikes) {
+        this.accidentInformationId = accidentInformationId;
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
+        this.likeCount = likeCount;
+        this.isLikes = isLikes != 0;
     }
 }

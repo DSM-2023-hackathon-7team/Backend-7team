@@ -27,8 +27,14 @@ public class LikesService {
 
         likesRepository.queryLikesByUserAndAccidentInformation(user, accidentInformation)
                 .ifPresentOrElse(
-                        likesRepository::deleteLikes,
-                        () -> likesRepository.saveLikes(new Likes(user, accidentInformation))
+                        likes -> {
+                            accidentInformation.subLikesCount();
+                            likesRepository.deleteLikes(likes);
+                        },
+                        () -> {
+                            accidentInformation.addLikesCount();
+                            likesRepository.saveLikes(new Likes(user, accidentInformation));
+                        }
                 );
     }
 }

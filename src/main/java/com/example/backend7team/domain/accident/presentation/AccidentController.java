@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.presentation;
 
+import com.example.backend7team.domain.accident.domain.repository.enums.SortType;
 import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentInformationRequest;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationListResponse;
 import com.example.backend7team.domain.accident.service.CreateAccidentInformationService;
@@ -32,8 +33,9 @@ public class AccidentController {
 
     @GetMapping("/information")
     public QueryAccidentInformationListResponse queryAccidentInformationList(
-            @RequestParam(value = "title", required = false) String title
-    ) {
-        return queryAccidentInformationListService.execute(title);
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "sort_type", defaultValue = "LIKES") SortType type
+            ) {
+        return queryAccidentInformationListService.execute(title, type);
     }
 }

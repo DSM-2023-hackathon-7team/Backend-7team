@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.domain;
 
+import com.example.backend7team.domain.likes.domain.Likes;
 import com.example.backend7team.domain.user.domain.User;
 import com.example.backend7team.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -15,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -40,17 +44,32 @@ public class AccidentInformation extends BaseTimeEntity {
     @Column(columnDefinition = "TINYINT(1)", nullable = false)
     private boolean isVerified;
 
+    @Column(columnDefinition = "INT", nullable = false)
+    private Integer likesCount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "accidentInformation", orphanRemoval = true)
+    private final List<Likes> likesList = new ArrayList<>();
+
     @Builder
-    public AccidentInformation(String title, String content, String imageUrl, Integer views, boolean isVerified, User user) {
+    public AccidentInformation(String title, String content, String imageUrl, Integer views, boolean isVerified, Integer likesCount, User user) {
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
         this.views = views;
         this.isVerified = isVerified;
+        this.likesCount = likesCount;
         this.user = user;
+    }
+
+    public void addLikesCount() {
+        this.likesCount += 1;
+    }
+
+    public void subLikesCount() {
+        this.likesCount -= 1;
     }
 }

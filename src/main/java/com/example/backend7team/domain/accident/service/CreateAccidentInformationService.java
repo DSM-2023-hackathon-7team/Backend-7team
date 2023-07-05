@@ -26,6 +26,7 @@ public class CreateAccidentInformationService {
                         .content(request.getContent())
                         .imageUrl(request.getImageUrl())
                         .views(0)
+                        .likesCount(0)
                         .isVerified(false)
                         .user(user)
                         .build()
