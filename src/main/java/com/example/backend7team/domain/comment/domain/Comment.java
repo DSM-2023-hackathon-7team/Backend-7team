@@ -3,6 +3,7 @@ package com.example.backend7team.domain.comment.domain;
 import com.example.backend7team.domain.accident.domain.Accident;
 import com.example.backend7team.domain.accident.domain.AccidentInformation;
 import com.example.backend7team.domain.user.domain.User;
+import com.example.backend7team.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Comment {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +35,11 @@ public class Comment {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accident_id", nullable = false)
+    @JoinColumn(name = "accident_id")
     private Accident accident;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accident_information_id", nullable = false)
+    @JoinColumn(name = "accident_information_id")
     private AccidentInformation accidentInformation;
 
     @Builder
