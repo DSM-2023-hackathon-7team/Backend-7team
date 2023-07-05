@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.domain;
 
+import com.example.backend7team.domain.comment.domain.Comment;
 import com.example.backend7team.domain.likes.domain.Likes;
 import com.example.backend7team.domain.user.domain.User;
 import com.example.backend7team.global.entity.BaseTimeEntity;
@@ -53,6 +54,9 @@ public class AccidentInformation extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "accidentInformation", orphanRemoval = true)
     private final List<Likes> likesList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "accidentInformation", orphanRemoval = true)
+    private final List<Comment> comments = new ArrayList<>();
 
     @Builder
     public AccidentInformation(String title, String content, String imageUrl, Integer views, boolean isVerified, Integer likesCount, User user) {

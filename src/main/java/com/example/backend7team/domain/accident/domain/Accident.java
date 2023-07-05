@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.domain;
 
+import com.example.backend7team.domain.comment.domain.Comment;
 import com.example.backend7team.domain.user.domain.User;
 import com.example.backend7team.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -15,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,6 +45,8 @@ public class Accident extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "accident", orphanRemoval = true)
+    private final List<Comment> comments = new ArrayList<>();
 
     @Builder
     public Accident(String title, String content, String imageUrl, Integer views, User user) {
