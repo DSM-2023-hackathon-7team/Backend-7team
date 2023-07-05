@@ -72,4 +72,9 @@ public class AccidentInformation extends BaseTimeEntity {
     public void subLikesCount() {
         this.likesCount -= 1;
     }
+
+    public void addViews() {
+        this.views += 1;
+    }
+
 }
