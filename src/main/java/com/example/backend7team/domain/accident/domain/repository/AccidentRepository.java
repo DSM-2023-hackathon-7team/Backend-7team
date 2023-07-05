@@ -50,11 +50,12 @@ public class AccidentRepository {
         return queryFactory
                 .select(
                         new QQueryAccidentVO(
-                               accident.title,
-                               accident.content,
-                               accident.imageUrl,
-                               accident.createdAt,
-                               accident.views
+                                accident.id,
+                                accident.title,
+                                accident.content,
+                                accident.imageUrl,
+                                accident.createdAt,
+                                accident.views
                         )
                 )
                 .from(accident)

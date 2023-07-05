@@ -3,11 +3,13 @@ package com.example.backend7team.domain.accident.presentation;
 import com.example.backend7team.domain.accident.domain.repository.enums.SortType;
 import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentInformationRequest;
 import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentRequest;
+import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentDetailsResponse;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationDetailsResponse;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationListResponse;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentListResponse;
 import com.example.backend7team.domain.accident.service.CreateAccidentInformationService;
 import com.example.backend7team.domain.accident.service.CreateAccidentService;
+import com.example.backend7team.domain.accident.service.QueryAccidentDetailsService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationDetailsService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationListService;
 import com.example.backend7team.domain.accident.service.QueryAccidentListService;
@@ -31,6 +33,7 @@ public class AccidentController {
 
     private final CreateAccidentService createAccidentService;
     private final QueryAccidentListService queryAccidentListService;
+    private final QueryAccidentDetailsService queryAccidentDetailsService;
     private final CreateAccidentInformationService createAccidentInformationService;
     private final QueryAccidentInformationListService queryAccidentInformationListService;
     private final QueryAccidentInformationDetailsService queryAccidentInformationDetailsService;
@@ -44,6 +47,11 @@ public class AccidentController {
     @GetMapping
     public QueryAccidentListResponse queryAccidentList() {
         return queryAccidentListService.execute();
+    }
+
+    @GetMapping("/{accident-id}")
+    public QueryAccidentDetailsResponse queryAccidentDetails(@PathVariable("accident-id") Long accidentId) {
+        return queryAccidentDetailsService.execute(accidentId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

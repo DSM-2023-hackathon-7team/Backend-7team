@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 public class QueryAccidentVO {
 
+    private final Long id;
     private final String title;
     private final String content;
     private final String imageUrl;
@@ -16,7 +17,8 @@ public class QueryAccidentVO {
     //TODO 댓글 개수
 
     @QueryProjection
-    public QueryAccidentVO(String title, String content, String imageUrl, LocalDateTime createdAt, Integer views) {
+    public QueryAccidentVO(Long id, String title, String content, String imageUrl, LocalDateTime createdAt, Integer views) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;

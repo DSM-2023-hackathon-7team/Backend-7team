@@ -14,7 +14,7 @@ public class QueryAccidentDetailsService {
 
     private final AccidentRepository accidentRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public QueryAccidentDetailsResponse execute(Long accidentId) {
         Accident accident = accidentRepository.queryAccidentById(accidentId)
                 .orElseThrow(() -> AccidentNotFoundException.EXCEPTION);
