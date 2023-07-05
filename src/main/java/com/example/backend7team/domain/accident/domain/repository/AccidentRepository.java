@@ -4,7 +4,9 @@ import com.example.backend7team.domain.accident.domain.Accident;
 import com.example.backend7team.domain.accident.domain.AccidentInformation;
 import com.example.backend7team.domain.accident.domain.repository.enums.SortType;
 import com.example.backend7team.domain.accident.domain.repository.vo.QQueryAccidentInformationVO;
+import com.example.backend7team.domain.accident.domain.repository.vo.QQueryAccidentVO;
 import com.example.backend7team.domain.accident.domain.repository.vo.QueryAccidentInformationVO;
+import com.example.backend7team.domain.accident.domain.repository.vo.QueryAccidentVO;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.backend7team.domain.accident.domain.QAccident.accident;
 import static com.example.backend7team.domain.accident.domain.QAccidentInformation.accidentInformation;
 import static com.example.backend7team.domain.likes.domain.QLikes.likes;
 import static com.example.backend7team.domain.user.domain.QUser.user;
@@ -37,6 +40,22 @@ public class AccidentRepository {
 
     public Optional<AccidentInformation> queryAccidentInformationById(Long id) {
         return accidentInformationJpaRepository.findById(id);
+    }
+
+    public List<QueryAccidentVO> queryAccidentList() {
+        return queryFactory
+                .select(
+                        new QQueryAccidentVO(
+                               accident.title,
+                               accident.content,
+                               accident.imageUrl,
+                               accident.createdAt,
+                               accident.views
+                        )
+                )
+                .from(accident)
+                .orderBy(accident.createdAt.desc())
+                .fetch();
     }
 
     public List<QueryAccidentInformationVO> queryAccidentInformationListByConditions(String title, SortType sortType, Long userId) {

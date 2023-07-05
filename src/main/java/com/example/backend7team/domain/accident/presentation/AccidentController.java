@@ -5,10 +5,12 @@ import com.example.backend7team.domain.accident.presentation.dto.request.CreateA
 import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentRequest;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationDetailsResponse;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationListResponse;
+import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentListResponse;
 import com.example.backend7team.domain.accident.service.CreateAccidentInformationService;
 import com.example.backend7team.domain.accident.service.CreateAccidentService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationDetailsService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationListService;
+import com.example.backend7team.domain.accident.service.QueryAccidentListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ import javax.validation.Valid;
 public class AccidentController {
 
     private final CreateAccidentService createAccidentService;
+    private final QueryAccidentListService queryAccidentListService;
     private final CreateAccidentInformationService createAccidentInformationService;
     private final QueryAccidentInformationListService queryAccidentInformationListService;
     private final QueryAccidentInformationDetailsService queryAccidentInformationDetailsService;
@@ -36,6 +39,11 @@ public class AccidentController {
     @PostMapping
     public void createAccident(@RequestBody @Valid CreateAccidentRequest request) {
         createAccidentService.execute(request);
+    }
+
+    @GetMapping
+    public QueryAccidentListResponse queryAccidentList() {
+        return queryAccidentListService.execute();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
