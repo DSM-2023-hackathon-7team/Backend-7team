@@ -2,9 +2,11 @@ package com.example.backend7team.domain.accident.presentation;
 
 import com.example.backend7team.domain.accident.domain.repository.enums.SortType;
 import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentInformationRequest;
+import com.example.backend7team.domain.accident.presentation.dto.request.CreateAccidentRequest;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationDetailsResponse;
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationListResponse;
 import com.example.backend7team.domain.accident.service.CreateAccidentInformationService;
+import com.example.backend7team.domain.accident.service.CreateAccidentService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationDetailsService;
 import com.example.backend7team.domain.accident.service.QueryAccidentInformationListService;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +27,16 @@ import javax.validation.Valid;
 @RestController
 public class AccidentController {
 
+    private final CreateAccidentService createAccidentService;
     private final CreateAccidentInformationService createAccidentInformationService;
     private final QueryAccidentInformationListService queryAccidentInformationListService;
     private final QueryAccidentInformationDetailsService queryAccidentInformationDetailsService;
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void createAccident(@RequestBody @Valid CreateAccidentRequest request) {
+        createAccidentService.execute(request);
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/information")
