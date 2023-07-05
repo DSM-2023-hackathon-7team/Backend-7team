@@ -42,6 +42,12 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/accidents/information").permitAll()
                 .antMatchers(HttpMethod.GET, "/accidents/information/{accident-information-id}").permitAll()
 
+                // comments
+                .antMatchers(HttpMethod.GET, "/comments/accident-information/{accident-information-id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/comments/accident/{accident-id}").permitAll()
+
+                // files
+                .antMatchers(HttpMethod.POST, "/files").permitAll()
 
                 .anyRequest().authenticated()
                 .and()

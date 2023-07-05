@@ -9,6 +9,8 @@ public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
+    FILE_UPLOAD_FAILED(400, "File Upload Failed"),
+
     EXPIRED_TOKEN(401, "Token Expired"),
     INVALID_TOKEN(401, "Invalid Token"),
     INVALID_PASSWORD(401, "Invalid Password"),
