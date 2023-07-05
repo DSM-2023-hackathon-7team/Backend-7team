@@ -14,6 +14,7 @@ public enum ErrorCode {
     INVALID_PASSWORD(401, "Invalid Password"),
 
     USER_NOT_FOUND(404, "User Not Found"),
+    ACCIDENT_NOT_FOUND(404, "Accident Not Found"),
     ACCIDENT_INFORMATION_NOT_FOUND(404, "Accident Information Not Found"),
 
     USER_ALREADY_EXISTS(409, "User Already Exists");
