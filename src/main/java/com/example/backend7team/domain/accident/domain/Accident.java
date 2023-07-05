@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.domain;
 
+import com.example.backend7team.domain.user.domain.User;
 import com.example.backend7team.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,9 +9,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,12 +37,18 @@ public class Accident extends BaseTimeEntity {
     @Column(columnDefinition = "BIGINT", nullable = false)
     private Integer views;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+
     @Builder
-    public Accident(String title, String content, String imageUrl, Integer views) {
+    public Accident(String title, String content, String imageUrl, Integer views, User user) {
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
         this.views = views;
+        this.user = user;
     }
 
     public void addViews() {
