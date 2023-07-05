@@ -38,6 +38,10 @@ public class AccidentRepository {
         accidentInformationJpaRepository.save(accidentInformation);
     }
 
+    public Optional<Accident> queryAccidentById(Long id) {
+        return accidentJpaRepository.findById(id);
+    }
+
     public Optional<AccidentInformation> queryAccidentInformationById(Long id) {
         return accidentInformationJpaRepository.findById(id);
     }
