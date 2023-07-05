@@ -6,6 +6,7 @@ import com.example.backend7team.domain.accident.exception.AccidentInformationNot
 import com.example.backend7team.domain.accident.presentation.dto.response.QueryAccidentInformationDetailsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -13,6 +14,7 @@ public class QueryAccidentInformationDetailsService {
 
     private final AccidentRepository accidentRepository;
 
+    @Transactional(readOnly = true)
     public QueryAccidentInformationDetailsResponse execute(Long accidentInformationId) {
         AccidentInformation accidentInformation = accidentRepository.queryAccidentInformationById(accidentInformationId)
                 .orElseThrow(() -> AccidentInformationNotFoundException.EXCEPTION);
