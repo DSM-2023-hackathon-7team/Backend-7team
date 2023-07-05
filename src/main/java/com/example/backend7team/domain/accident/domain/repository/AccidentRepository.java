@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.backend7team.domain.accident.domain.QAccidentInformation.accidentInformation;
 import static com.example.backend7team.domain.user.domain.QUser.user;
@@ -22,6 +23,10 @@ public class AccidentRepository {
 
     public void saveAccidentInformation(AccidentInformation accidentInformation) {
         accidentInformationJpaRepository.save(accidentInformation);
+    }
+
+    public Optional<AccidentInformation> queryAccidentInformationById(Long id) {
+        return accidentInformationJpaRepository.findById(id);
     }
 
     public List<QueryAccidentInformationVO> queryAccidentInformationListByConditions(String title) {
