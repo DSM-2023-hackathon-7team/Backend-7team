@@ -1,5 +1,6 @@
 package com.example.backend7team.domain.accident.domain.repository;
 
+import com.example.backend7team.domain.accident.domain.Accident;
 import com.example.backend7team.domain.accident.domain.AccidentInformation;
 import com.example.backend7team.domain.accident.domain.repository.enums.SortType;
 import com.example.backend7team.domain.accident.domain.repository.vo.QQueryAccidentInformationVO;
@@ -23,7 +24,12 @@ import static com.example.backend7team.domain.user.domain.QUser.user;
 public class AccidentRepository {
 
     private final AccidentInformationJpaRepository accidentInformationJpaRepository;
+    private final AccidentJpaRepository accidentJpaRepository;
     private final JPAQueryFactory queryFactory;
+
+    public void saveAccident(Accident accident) {
+        accidentJpaRepository.save(accident);
+    }
 
     public void saveAccidentInformation(AccidentInformation accidentInformation) {
         accidentInformationJpaRepository.save(accidentInformation);
